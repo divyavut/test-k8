@@ -45,7 +45,7 @@ spec:
       rayStartParams:
         num-cpus: "1"
         num-gpus: "0" 
-  ---
+---
 apiVersion: v1
 kind: Service
 metadata:
