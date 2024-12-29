@@ -16,8 +16,16 @@ spec:
               limits:
                 cpu: "1"
                 memory: "2Gi"
+            # Required: Specify Ray startup parameters
+            env:
+              - name: RAY_START_PARAMS
+                value: "--num-cpus=1 --num-gpus=0"
+    rayStartParams:
+      num-cpus: "1"
+      num-gpus: "0"
   workerGroupSpecs:
-    - replicas: 2
+    - groupName: worker-group-1  # Required: Name of the worker group
+      replicas: 2  # Number of worker pods
       template:
         spec:
           containers:
@@ -30,3 +38,10 @@ spec:
                 limits:
                   cpu: "1"
                   memory: "3Gi"
+              # Required: Specify Ray startup parameters
+              env:
+                - name: RAY_START_PARAMS
+                  value: "--num-cpus=1 --num-gpus=0"
+      rayStartParams:
+        num-cpus: "1"
+        num-gpus: "0"
