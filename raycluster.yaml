@@ -1,0 +1,33 @@
+apiVersion: ray.io/v1alpha1
+kind: RayCluster
+metadata:
+  name: raycluster-example
+spec:
+  headGroupSpec:
+    replicas: 1  # 1 head node
+    template:
+      spec:
+        containers:
+          - name: ray-head
+            image: rayproject/ray:latest
+            resources:
+              requests:
+                cpu: "500m"      # 0.5 CPU for the head node
+                memory: "1Gi"    # 1 GiB memory for the head node
+              limits:
+                cpu: "1"         # 1 CPU for the head node
+                memory: "2Gi"    # 2 GiB memory for the head node
+  workerGroupSpecs:
+    - replicas: 2  # 2 worker nodes (since you have 2 worker nodes in the EKS cluster)
+      template:
+        spec:
+          containers:
+            - name: ray-worker
+              image: rayproject/ray:latest
+              resources:
+                requests:
+                  cpu: "1"         # 1 CPU for each worker node
+                  memory: "2Gi"    # 2 GiB memory for each worker node
+                limits:
+                  cpu: "1"         # 1 CPU limit for each worker node
+                  memory: "3Gi"    # 3 GiB memory limit for each worker node
