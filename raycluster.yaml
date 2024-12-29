@@ -89,7 +89,7 @@ spec:
             env:
               - name: RAY_START_PARAMS
                 value: "--num-cpus=1 --num-gpus=0"
-    rayStartParams:  # Added required field
+    rayStartParams:
       num-cpus: "1"
       num-gpus: "0"
   workerGroupSpecs:
@@ -114,9 +114,10 @@ spec:
               env:
                 - name: RAY_START_PARAMS
                   value: "--num-cpus=1 --num-gpus=0"
-      rayStartParams:  # Added required field
+      rayStartParams:
         num-cpus: "1"
         num-gpus: "0"
+
 ---
 apiVersion: v1
 kind: Service
