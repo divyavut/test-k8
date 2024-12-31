@@ -3,5 +3,6 @@ kind: StorageClass
 metadata:
   name: expense-ebs
 provisioner: ebs.csi.aws.com
+reclaimPolicy: Retain
 volumeBindingMode: WaitForFirstConsumer
 ---
