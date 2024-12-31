@@ -25,9 +25,9 @@ spec:
   template: 
     metadata: 
       labels: 
-       tier: app 
-       app: backend
-       project: expense
+        tier: app 
+        app: backend
+        project: expense
     spec: 
       containers: 
       - name: backend
@@ -44,8 +44,8 @@ metadata:
   namespace: expense
 spec:
   selector:
-    app: backend
     tier: app 
+    app: backend
     project: expense
   ports:
   - name: backend-port
