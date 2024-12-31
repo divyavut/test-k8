@@ -5,15 +5,47 @@ metadata:
 provisioner: ebs.csi.aws.com
 reclaimPolicy: Retain
 volumeBindingMode: WaitForFirstConsumer
+
 --- 
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: expense-ebs-claim
+  name: ebs-dynamic-claim
 spec:
   accessModes:
     - ReadWriteOnce
   storageClassName: expense-ebs
   resources:
     requests:
-      storage: 4Gi
+      storage: 4Gi 
+---
+
+piVersion: v1
+kind: Pod
+metadata:
+  name: ebs-dynamic-pod 
+  labels:
+     purpose: ebs-dynamic
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    volumeMounts:
+    - name: ebs-dynamic-claim
+      mountPath: /usr/share/nginx/html
+  volumes:
+  - name: ebs-dynamic-claim
+    persistentVolumeClaim:
+      claimName: ebs-dynamic-claim  
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: ebs-dynamic-service
+spec:
+  type: LoadBalancer
+  selector:
+    purpose: ebs-dynamic
+  ports:
+  - port: 80
+    targetPort: 80
