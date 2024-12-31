@@ -12,4 +12,36 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   csi:
     driver: efs.csi.aws.com
-    volumeHandle: fs-0a6d01da672ad83a6
+    volumeHandle: fs-0a6d01da672ad83a6 
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: efs-static-claim
+spec:
+  volumeName: efs-static
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: " "
+  resources:
+    requests:
+      storage: 5Gi 
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: efs-static-pod
+spec:
+  containers:
+  - name: app
+    image: centos
+    volumeMounts:
+    - name: efs-static-claim
+      mountPath: /usr/share/nginx/html
+  volumes:
+  - name: efs-static-claim
+    persistentVolumeClaim:
+      claimName: efs-static-claim
