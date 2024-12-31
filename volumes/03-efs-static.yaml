@@ -24,7 +24,7 @@ spec:
   volumeName: efs-static
   accessModes:
     - ReadWriteOnce
-  storageClassName: " "
+  storageClassName: ""
   resources:
     requests:
       storage: 5Gi 
