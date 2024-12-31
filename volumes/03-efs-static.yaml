@@ -36,8 +36,8 @@ metadata:
   name: efs-static-pod
 spec:
   containers:
-  - name: app
-    image: centos
+  - name: nginx
+    image: nginx
     volumeMounts:
     - name: efs-static-claim
       mountPath: /usr/share/nginx/html
