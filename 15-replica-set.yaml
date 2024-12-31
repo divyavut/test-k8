@@ -3,19 +3,16 @@ kind: ReplicaSet
 metadata: 
   name: rs
   labels:
-    tier: frontend 
-    app: nginx
+    tier: web 
 spec: 
   replicas: 3 
   selector:
     matchLabels:
-      tier: frontend 
-      app: nginx
+      tier: web 
   template: 
     metadata: 
       labels: 
-        tier: frontend 
-        app: nginx
+        tier: web 
     spec: 
       containers: 
       - name: nginx
