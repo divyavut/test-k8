@@ -1,0 +1,22 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata: 
+  name: dp
+  labels:
+    tier: frontend 
+    app: nginx
+spec: 
+  replicas: 3 
+  selector:
+    matchLabels:
+      tier: frontend 
+      app: nginx
+  template: 
+    metadata: 
+      labels: 
+        tier: frontend 
+        app: nginx
+    spec: 
+      containers: 
+      - name: nginx
+        image: nginx
