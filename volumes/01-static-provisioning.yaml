@@ -28,7 +28,7 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: ebs-ststic
+  name: ebs-static
 spec:
   containers:
   - name: nginx
