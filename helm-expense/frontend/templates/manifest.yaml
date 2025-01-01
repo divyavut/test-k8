@@ -23,7 +23,7 @@ spec:
     spec: 
       containers: 
       - name: frontend
-        image: joindevops/frontend: {{ .Values.deployment.imageVersion }}
+        image: joindevops/frontend:{{ .Values.deployment.imageVersion }}
         resources: 
           requests: 
             cpu: 100m
@@ -61,4 +61,4 @@ spec:
     name: frontend
   minReplicas: 1
   maxReplicas: 10
-  targetCPUUtilizationPercentage: {{ .Values.hpa.CPUUtilization}}
+  targetCPUUtilizationPercentage: {{ .Values.hpa.CPUUtilization }}
