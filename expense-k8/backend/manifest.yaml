@@ -60,7 +60,7 @@ spec:
     targetPort: 8080 
 
 --- 
-apiVersion: autoscaling/v2
+apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
   name: hpa-backend
