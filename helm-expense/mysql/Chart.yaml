@@ -1,0 +1,4 @@
+apiVersion: v1
+name: mysql
+version: 0.01
+description: this is a chart to manage mysql 
