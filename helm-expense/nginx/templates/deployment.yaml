@@ -1,0 +1,23 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata: 
+  name: dp
+  labels:
+    app: nginx
+    tier: frontend
+spec: 
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+     app: nginx
+     tier: frontend
+  template: 
+    metadata: 
+      labels: 
+        app: nginx
+        tier: frontend
+    spec: 
+      containers: 
+      - name: nginx
+      # this is called as placeholder
+        image: nginx:{{ .Values.deployment.imageVersion }}
