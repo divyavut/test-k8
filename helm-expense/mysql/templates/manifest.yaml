@@ -23,7 +23,7 @@ spec:
     spec: 
       containers: 
       - name: mysql
-        image: joindevops/mysql: {{ .Values.deployment.imageVersion}}
+        image: joindevops/mysql: {{ .Values.deployment.imageVersion }}
 ---
 apiVersion: v1
 kind: Service
