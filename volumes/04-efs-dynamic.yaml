@@ -1,0 +1,51 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: efs-expense
+provisioner: efs.csi.aws.com
+parameters:
+  provisioningMode: efs-ap
+  fileSystemId: fs-0a6d01da672ad83a6
+  basePath: "/expense" # optional
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: efs-dynamic-claim
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: efs-expense
+  resources:
+    requests:
+      storage: 5Gi
+--- 
+apiVersion: v1
+kind: Pod
+metadata:
+  name: efs-dynamic-pod
+  labels:
+    purpose: efs-dynamic
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      volumeMounts:
+        - name: efs-dynamic-claim
+          mountPath: /usr/shar/nginx/html
+  volumes:
+    - name: efs-dynamic-claim
+      persistentVolumeClaim:
+        claimName: efs-dynamic-claim 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: efs-static
+spec:
+  type: LoadBalancer
+  selector:
+    purpose: efs-dynamic
+  ports:
+  - port: 80
+    targetPort: 80
